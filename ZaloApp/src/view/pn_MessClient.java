@@ -5,10 +5,15 @@ public class pn_MessClient extends javax.swing.JPanel {
     public pn_MessClient(String messClient,String name) {
         initComponents();
         taMessClient.setWrapStyleWord(true);
-        taMessClient.setText(messClient.split("@")[0]);
-        time.setText(messClient.split("@")[2]);
-        taMessClient.setEditable(false);
-        nameU.setText(name);
+        if (messClient.split("@").length <= 1) {
+            taMessClient.setText(messClient);
+        }
+        else {
+            taMessClient.setText(messClient.split("@")[0]);
+            time.setText(messClient.split("@")[2]);
+            taMessClient.setEditable(false);
+            nameU.setText(name);
+        }
     }
 
     @SuppressWarnings("unchecked")

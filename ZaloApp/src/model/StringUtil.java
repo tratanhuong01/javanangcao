@@ -1,7 +1,9 @@
 
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 public class StringUtil {
      private static final char[] coDau = {'À', 'Á', 'Â', 'Ã', 'È', 'É',
@@ -41,6 +43,17 @@ public class StringUtil {
             sb.setCharAt(i, replace(sb.charAt(i)));
         }
         return sb.toString();
+        
+        
     }
-    
+    public static void main(String[] args) {
+        String userInput = "2001-10-01";
+        Date date = new Date(System.currentTimeMillis());
+        String serverOutput = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        String[] arrUser = userInput.split("-");
+        String[] arrServer = serverOutput.split("-");
+        System.out.println("Tuổi : " + (Integer.parseInt(arrServer[0]) - Integer.parseInt(arrUser[0]) - 1));
+        System.out.println("Tháng : " + -(Integer.parseInt(arrServer[1]) - Integer.parseInt(arrUser[1])));
+        System.out.println("Ngày : " + (Integer.parseInt(arrServer[2]) - Integer.parseInt(arrUser[2])));
+    }
 }

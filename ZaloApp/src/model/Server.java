@@ -1,31 +1,49 @@
 package model;
 
-import controller.CheckLike;
+import controller.*;
 import java.io.*;
 import java.net.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.*;
-import view.Clients;
+import java.util.*;
+import javax.swing.*;
+import view.*;
 
 public class Server {
+    ServerSocket serverSocket;
 
-    Clients clients = new Clients();
-
-    public static void main(String[] args) {
+    public void server(){
         try {
-            ServerSocket serverSocket = new ServerSocket(6654);
+            serverSocket = new ServerSocket(6654);
             while (true) {
+                System.out.println("loading.......");
                 Socket connectSocket = serverSocket.accept();
                 DataInputStream dis = new DataInputStream(connectSocket.getInputStream());
                 DataOutputStream dos = new DataOutputStream(connectSocket.getOutputStream());
-                Date date = new Date(System.currentTimeMillis());
-                String time = new SimpleDateFormat("hh:mm:ss").format(date);
                 String in = dis.readUTF();
-                String str = new CheckLike().check(in);
-                dos.writeUTF(in + "@" + str + "@" + time);
-                dos.flush();
+                switch (in) {
+                    case "chat-bot":
+                        Date date1 = new Date(System.currentTimeMillis());
+                        String time1 = new SimpleDateFormat("hh:mm:ss").format(date1);
+                        dos.writeUTF("Chào mừng bạn đến với chat bot? " + "@" + time1);
+                        dos.flush();
+                        break;
+                    case "chat-server":
+                        Date date2 = new Date(System.currentTimeMillis());
+                        String time2 = new SimpleDateFormat("hh:mm:ss").format(date2);
+                        Clients.pnMain.add(new pn_MessClient(dis.readUTF(), time2));
+                        dos.writeUTF(Servers.input.getText());
+                        dos.flush();
+                        break;
+                    default:
+                        Date date3 = new Date(System.currentTimeMillis());
+                        String time3 = new SimpleDateFormat("hh:mm:ss").format(date3);
+                        String str = new CheckLike().check(in);
+                        dos.writeUTF(in + "@" + str + "@" + time3);
+                        dos.flush();
+                        break;
+                        
+                }
+
             }
 
         } catch (Exception e) {

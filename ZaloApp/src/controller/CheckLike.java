@@ -1,7 +1,7 @@
 package controller;
 
-import java.util.List;
-import model.StringUtil;
+import java.util.*;
+import model.*;
 
 public class CheckLike {
 
@@ -22,9 +22,7 @@ public class CheckLike {
         }
         return str;
     }
-
-   
     public static void main(String[] args) {
-        System.out.println(new CheckLike().check("em có người yêu chưa nhỉ"));
+        String s = "Huong Tra Tan Huong Tra";
     }
 }

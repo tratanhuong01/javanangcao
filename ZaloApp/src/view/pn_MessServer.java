@@ -25,8 +25,17 @@ public class pn_MessServer extends javax.swing.JPanel {
                     pnMess.removeAll();
                     pnMess.setLayout(new BorderLayout());
                     pnMess.add(taMessServer);
-                    taMessServer.setText(messServer.split("@")[1]);
-                    times.setText(messServer.split("@")[2]);
+                    if (messServer.split("@").length == 2) {
+                        taMessServer.setText(messServer.split("@")[0]);
+                        times.setText(messServer.split("@")[1]);
+                    } else if (messServer.split("@").length == 3) {
+                        taMessServer.setText(messServer.split("@")[1]);
+                        times.setText(messServer.split("@")[2]);
+                    }
+                    else {
+                        taMessServer.setText(messServer.split("@")[0]);
+                        times.setText(messServer.split("@")[1]);
+                    }
                     pnMess.validate();
                 }
             }
